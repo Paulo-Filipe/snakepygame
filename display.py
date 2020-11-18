@@ -1,6 +1,5 @@
 import pygame
 import sys
-from pygame.locals import *
 from assets import *
 
 

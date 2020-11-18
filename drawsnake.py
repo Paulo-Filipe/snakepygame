@@ -1,6 +1,5 @@
 import pygame
 import sys
-from pygame.locals import *
 
 
 def draw_snake_tile(display, color, x, y, tile_size):
