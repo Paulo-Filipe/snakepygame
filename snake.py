@@ -38,7 +38,7 @@ while True:
             sys.exit()
     
     for i in range(initial_snake_size):
-        draw_snake_tale(DISPLAY, RED, initial_position_x+i*tile_size, initial_position_y, tile_size)
+        draw_snake_tile(DISPLAY, RED, initial_position_x+i*tile_size, initial_position_y, tile_size)
     pygame.display.update()
    
     FramePerSec.tick(FPS)
