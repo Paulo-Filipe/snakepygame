@@ -32,19 +32,23 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key in controllers.values() and forbidden_turns[direction] != event.key:
-                direction = event.key
-                (x, y, old_direction) = snake[0] # change the direction of the head.
-                snake[0] = (x, y, direction)
+        elif event.type == pygame.KEYDOWN and event.key in controllers.values() and forbidden_turns[direction] != event.key:
+            direction = event.key
+            (x, y, old_direction) = snake[0] 
+            snake[0] = (x, y, direction) # change the direction of the head.
 
     DISPLAY.fill(colors['GREEN'])
+
+    # Check for colisions
+
+    # Check for incrising the snake size.
 
     for i in range(snake_size-1, -1, -1):
         (x, y, direction) = snake[i]
         (move_x, move_y) = snake_directions[direction]
         new_pos_x = x + move_x
         new_pos_y = y + move_y
+
         draw_snake_tile(DISPLAY, colors['RED'], new_pos_x, new_pos_y, tile_size) # draw on new position.
 
         if i == 0: # change all directions, except for the head. update all positions.
