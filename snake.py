@@ -1,5 +1,6 @@
 import pygame, sys
 from pygame.locals import *
+from drawsnake import *
 
 # Initialize program
 pygame.init()
@@ -24,13 +25,9 @@ FramePerSec = pygame.time.Clock()
 
 #describing snake
 tile_size = 20
-initial_tile_size = 6
+initial_snake_size = 6
 initial_position_x = display_size / 2
 initial_position_y = display_size / 2
- 
- 
-# Creating Snake shape
-snake_tile = pygame.draw.rect(DISPLAY, RED, (initial_position_x, initial_position_y, tile_size, tile_size))
  
 # Beginning Game Loop
 while True:
@@ -39,7 +36,9 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    snake_tile
+    
+    for i in range(initial_snake_size):
+        draw_snake_tale(DISPLAY, RED, initial_position_x+i*tile_size, initial_position_y, tile_size)
     pygame.display.update()
    
     FramePerSec.tick(FPS)
