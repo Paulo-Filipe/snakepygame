@@ -39,9 +39,17 @@ while True:
                 (x, y, old_direction) = snake[0]
                 snake[0] = (x, y, direction)
 
+    DISPLAY.fill(GREEN)
     for i in range(snake_size-1, -1, -1):
         (x, y, direction) = snake[i]
         (move_x, move_y) = snake_directions[direction]
+        
+        if i == 0:
+            snake[i] = (x + move_x, y + move_y, direction)
+        else:
+            (next_x, next_y, next_direction) = snake[i-1]
+            snake[i] = (x + move_x, y + move_y, next_direction)
+
         draw_snake_tile(DISPLAY, RED, x+move_x, y+move_y, tile_size)
     pygame.display.update()
 
