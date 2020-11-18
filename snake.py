@@ -1,9 +1,9 @@
 import pygame
 import sys
-from drawsnake import *
+from snake_services import *
 from assets import *
 from display import *
-from controllers import *
+from controls import *
 
 # Initialize program
 pygame.init()
@@ -33,23 +33,26 @@ while True:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            if event.key in controllers.values():
+            if event.key in controllers.values() and forbidden_turns[direction] != event.key:
                 direction = event.key
                 (x, y, old_direction) = snake[0] # change the direction of the head.
                 snake[0] = (x, y, direction)
 
     DISPLAY.fill(colors['GREEN'])
+
     for i in range(snake_size-1, -1, -1):
         (x, y, direction) = snake[i]
         (move_x, move_y) = snake_directions[direction]
+        new_pos_x = x + move_x
+        new_pos_y = y + move_y
+        draw_snake_tile(DISPLAY, colors['RED'], new_pos_x, new_pos_y, tile_size) # draw on new position.
 
-        if i == 0: # change all directions, except for the head.
-            snake[i] = (x + move_x, y + move_y, direction)
+        if i == 0: # change all directions, except for the head. update all positions.
+            snake[i] = (new_pos_x, new_pos_y, direction)
         else:
             (next_x, next_y, next_direction) = snake[i-1]
-            snake[i] = (x + move_x, y + move_y, next_direction)
-
-        draw_snake_tile(DISPLAY, colors['RED'], x+move_x, y+move_y, tile_size)
+            snake[i] = (new_pos_x, new_pos_y, next_direction)
+        
     pygame.display.update()
 
     FramePerSec.tick(FPS)
