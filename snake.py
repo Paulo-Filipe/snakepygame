@@ -18,6 +18,9 @@ position_y = display.display_size / 2
 snake = snake_services.create_snake(
     tile_size, snake_size, direction, position_x, position_y)
 
+# describing the background
+background_color = assets.colors['BLACK']
+
 # describing directions
 snake_directions = {
     controls.controllers['LEFT']:  (-tile_size, 0),
@@ -34,7 +37,7 @@ frame_counter = 0
 food_spawn_interval = 20
 food_pos = (None, None)
 
-# Beginning Game Loop
+# Beginning Main Game Loop
 while True:
     pygame.time.delay(50)
     for event in pygame.event.get():
@@ -46,7 +49,8 @@ while True:
             (x, y, old_direction) = snake[0]
             snake[0] = (x, y, direction)  # change the direction of the head.
 
-    display.DISPLAY.fill(assets.colors['BLACK'])
+    # reset the screen
+    display.DISPLAY.fill(background_color)
 
     # Check for colisions between head and body.
     if snake_services.check_collision(snake):
