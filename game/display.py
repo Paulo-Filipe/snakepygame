@@ -9,6 +9,6 @@ DISPLAY.fill(assets.colors['GREEN'])
 pygame.display.set_caption("Snake")
 
 # Assign FPS a value
-FPS = 1
+FPS = 60
 Clock = pygame.time.Clock()
 FramePerSec= Clock.tick(FPS)
