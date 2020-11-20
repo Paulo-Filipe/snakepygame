@@ -1,18 +1,13 @@
-# snakepygame
+# Snake PyGame
 implementing the classic game Snake on Python 3 (pygame) for fun.
 
 ``ReadMe still in development.`` as well is the game.
 
-You only need to install pipenv:
+
+to run the game:
 
 ```
-pip install pipenv
-```
-
-and run the game:
-
-```
-pipenv run python snake.py
+python snake.py
 ```
 
 Controls:
