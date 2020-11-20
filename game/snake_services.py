@@ -1,6 +1,4 @@
-import pygame
-import sys
-from controls import *
+import pygame, sys
 
 def draw_snake_tile(display, color, x, y, tile_size):
     return pygame.draw.rect(display, color, (x, y, tile_size, tile_size))
