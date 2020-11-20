@@ -33,13 +33,19 @@ def spawn_food(tile_size, snake, food):
     return (x_food, y_food)
 
 
-def add_tile(snake,snake_directions):
+def add_tile(snake, snake_directions):
     (last_x, last_y, last_direction) = snake[-1]
-
-    print(snake[-1])
 
     (dir_x, dir_y) = snake_directions[last_direction]
 
-    snake.append((last_x+dir_y, last_y+dir_x, last_direction))
+    snake.append((last_x + (dir_x * -1), last_y + (dir_y * -1), last_direction))
 
-    print(snake[-1])
+def check_collision(snake):
+    (x_0, y_0, direction_0) = snake[0]
+    collision = False
+    for i in range(3, len(snake)):
+        (x_i, y_i, direction_i) = snake[i]
+        if x_0 == x_i and y_0 == y_i:
+            collision = True
+            break
+    return collision
