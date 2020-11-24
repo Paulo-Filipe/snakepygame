@@ -1,6 +1,4 @@
-import pygame
-import sys
-import random
+import pygame, sys, random
 from game import display
 
 
