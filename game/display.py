@@ -34,9 +34,9 @@ selected_font = 'ubuntu'
 if not selected_font in pygame.font.get_fonts():
     selected_font = None
 
-def callText(txt):
+def callText(txt, posx= (display_size + score_size + 20) // 2, posy= (display_size + score_size + 20) // 2 ):
     font = pygame.font.SysFont('ubuntu', 32)
     message = font.render(txt, True, assets.colors['GREEN'], assets.colors['BLACK'])
     message_rect = message.get_rect()
-    message_rect.center = (display_size // 2, display_size // 2)
+    message_rect.center = (posx, posy)
     return DISPLAY.blit(message, message_rect)

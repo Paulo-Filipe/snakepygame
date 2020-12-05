@@ -68,7 +68,7 @@ while True:
     # Check for colisions between head and body.
     if snake_services.check_collision(snake) or dead:
         dead = True
-        display.callText(f'{points} pontos conquistados')
+        display.callText(f'{points} pontos')
 
     # Check for incrising the snake size - collision with food - spawn food.
     if frame_counter < food_spawn_interval:
@@ -91,12 +91,13 @@ while True:
     if food_pos != (None, None) and snake_services.isInSnake(snake, food_pos):
         snake_services.add_tile(snake, snake_directions)
         snake_size += 1
-        points += frame_counter  # that's a game design decision :)
+        points += frame_counter + 1 #that's a game design decision :)
         food_pos = (None, None)
 
     # start computing movement
 
     if not dead:
+        display.callText(f'{points}',display.score_size // 2, display.score_size // 2)
         for i in range(snake_size-1, -1, -1):
             (x, y, direction) = snake[i]
             (move_x, move_y) = snake_directions[direction]
