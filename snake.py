@@ -19,6 +19,9 @@ position_y = display.display_size / 2
 snake = snake_services.create_snake(
     tile_size, snake_size, direction, position_x, position_y)
 
+# snake state
+dead = False
+
 # describing the background
 background_color = assets.colors['BLACK']
 
@@ -29,17 +32,23 @@ snake_directions = {
     controls.controllers['UP']:    (0, -tile_size),
     controls.controllers['DOWN']:  (0, tile_size)
 }
+
 # defines the limits where the snake will be drawn.
-legal_display_range = display.display_size
+def check_for_borders(pos):
+    if pos < display.score_size:
+        return pos + display.display_size
+    elif pos >= display.score_size + display.display_size:
+        return pos - display.display_size
+    else:
+        return pos
+
 
 # points controller
 points = 0
 frame_counter = 0
-food_spawn_interval = 20
+food_spawn_interval = 10
 food_pos = (None, None)
 
-# snake state
-dead = False
 
 # Beginning Main Game Loop
 while True:
@@ -92,8 +101,8 @@ while True:
             (x, y, direction) = snake[i]
             (move_x, move_y) = snake_directions[direction]
 
-            new_pos_x = (x + move_x) % legal_display_range
-            new_pos_y = (y + move_y) % legal_display_range
+            new_pos_x = check_for_borders(x + move_x)
+            new_pos_y = check_for_borders(y + move_y)
 
             # draw on new position.
             snake_services.draw_snake_tile(
@@ -104,12 +113,13 @@ while True:
             else:
                 (next_x, next_y, next_direction) = snake[i-1]
                 snake[i] = (new_pos_x, new_pos_y, next_direction)
-    elif frame_counter % 2 == 0:
+    elif frame_counter % 3 == 0:
         for i in snake:
             (x, y, direction) = i
             snake_services.draw_snake_tile(
                 display.DISPLAY, snake_color, x, y, tile_size)
     
+    display.stage()
     pygame.display.update()
 
     display.FramePerSec

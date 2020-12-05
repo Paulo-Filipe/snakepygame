@@ -25,8 +25,8 @@ def isInSnake(snake, food):
 def spawn_food(tile_size, snake, food):
     (x_food, y_food) = food
     while isInSnake(snake, (x_food, y_food)) or (x_food, y_food) == (None, None):
-        x = random.randrange(0, display.display_size, tile_size)
-        y = random.randrange(0, display.display_size, tile_size)
+        x = random.randrange(0 + display.score_size, display.display_size - display.score_size, tile_size)
+        y = random.randrange(0 + display.score_size, display.display_size - display.score_size, tile_size)
         (x_food, y_food) = (x, y)
     return (x_food, y_food)
 
